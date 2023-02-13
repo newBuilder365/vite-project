@@ -2,12 +2,14 @@ import { createApp } from 'vue'
 import router from './router'
 import App from './App.vue'
 import { createPinia } from 'pinia'
-const modules = import.meta.glob('./components/**/index.ts')
+import coms from '@/components/Index'
+// import Foo from '@/components/foo/index.vue'
+// const coms = {
+//   install: (app: VueApp) => {
+//     app.component('Foo', Foo)
+//   }
 
-const app = createApp(App).use(createPinia()).use(router)
+// }
+console.log('coms', coms)
 
-for (const path in modules) {
-  app.use(modules[path])
-}
-
-app.mount('#app')
+createApp(App).use(createPinia()).use(router).use(coms).mount('#app')

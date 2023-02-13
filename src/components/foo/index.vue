@@ -1,3 +1,4 @@
 <template>
-  <p>全局组件</p>
+  <h1>全局组件</h1>
+  <Bar />
 </template>
