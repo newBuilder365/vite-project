@@ -17,7 +17,8 @@
     "eslint": "^8.0.1",
     "pinia": "^2.0.30",
     "sass": "^1.58.1",
-    "unplugin-vue-components": "^0.23.0",
+    "unplugin-auto-import": "^0.14.2",
+    "unplugin-vue-components": "0.22.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
