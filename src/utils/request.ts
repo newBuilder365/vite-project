@@ -5,7 +5,7 @@ import axios, {
 } from 'axios'
 
 const request: AxiosInstance = axios.create({
-  baseURL: 'http://220.178.103.125:8088',
+  baseURL: 'https://shop.fed.lagounews.com/api/admin',
   timeout: 5000
 })
 
@@ -24,13 +24,6 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response: AxiosResponse) => {
-    response.data.data = response.data.Data
-    response.data = {
-      data: response.data.Data,
-      message: response.data.Message,
-      code: response.data.Code,
-      state: response.data.State
-    }
     return response.data
   },
   (error: any) => {

@@ -2,10 +2,9 @@ import { AxiosResponse } from 'axios'
 
 // 接口返回后最终想要类型
 export type ICommom<T>= {
+  status: number;
+  msg: string;
   data: T;
-  state: boolean;
-  message: string;
-  code: string;
 }
 
 // 服务返回的数据类型
