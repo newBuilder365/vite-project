@@ -5,4 +5,6 @@ import { createPinia } from 'pinia'
 import coms from '@/components/Index'
 import '@/styles/index.scss'
 
-createApp(App).use(createPinia()).use(router).use(coms).mount('#app')
+const app = createApp(App)
+
+app.use(createPinia()).use(router).use(coms).mount('#app')

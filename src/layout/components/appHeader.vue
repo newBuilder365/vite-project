@@ -19,3 +19,11 @@ import MenuSearch from './menuSearch.vue'
 import ToggleSidebar from './toggleSidebar.vue'
 import Breadcrumb from './breadcrumb.vue'
 </script>
+
+<style lang="scss" scoped>
+i {
+  font-size: 19px;
+  cursor: pointer;
+}
+
+</style>
