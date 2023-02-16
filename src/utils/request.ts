@@ -5,7 +5,8 @@ import axios, {
 } from 'axios'
 
 const request: AxiosInstance = axios.create({
-  baseURL: 'https://shop.fed.lagounews.com/api/admin',
+  baseURL: '/api',
+  // baseURL: import.meta.env.VITE_API_BASEURL,
   timeout: 5000
 })
 

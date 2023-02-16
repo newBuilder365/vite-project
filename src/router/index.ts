@@ -15,6 +15,9 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: AppLayout,
+    meta: {
+      title: '首页'
+    },
     children: [
       {
         path: '',
@@ -35,6 +38,7 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
   nprogress.start()
+  // document.title = to.meta.title
 })
 
 router.afterEach(() => {
