@@ -1,48 +1,53 @@
 <template>
   <div class="login-container">
     <el-form
-      ref="ruleFormRef"
-      :model="ruleForm"
+      class="login-form"
       :rules="rules"
-      label-width="120px"
-      class="demo-ruleForm"
+      ref="form"
+      :model="user"
       size="default"
-      status-icon
+      @submit.prevent="handleSubmit"
     >
-      <el-form-item
-        label="用户名"
-        prop="account"
-      >
-        <el-input v-model="ruleForm.account" />
-      </el-form-item>
-      <el-form-item
-        label="密码"
-        prop="pwd"
-      >
+      <div class="login-form__header">
+        <h1>管理系统</h1>
+      </div>
+      <el-form-item prop="account">
         <el-input
+          v-model="user.account"
+          placeholder="请输入用户名"
+          :prefix-icon="User"
+        />
+      </el-form-item>
+      <el-form-item prop="pwd">
+        <el-input
+          v-model="user.pwd"
           type="password"
-          v-model="ruleForm.pwd"
+          placeholder="请输入密码"
+          :prefix-icon="Lock"
         />
       </el-form-item>
-      <el-form-item
-        label="验证码"
-        prop="imgcode"
-      >
-        <el-input
-          v-model="ruleForm.imgcode"
-        />
-        <img
-          class="imgcode"
-          alt="验证码"
-          src="https://shop.fed.lagounews.com/api/admin/captcha_pro"
-        >
+      <el-form-item prop="imgcode">
+        <div class="imgcode-wrap">
+          <el-input
+            v-model="user.imgcode"
+            placeholder="请输入验证码"
+            :prefix-icon="Key"
+          />
+          <img
+            class="imgcode"
+            alt="验证码"
+            src="https://shop.fed.lagounews.com/api/admin/captcha_pro"
+          >
+        </div>
       </el-form-item>
       <el-form-item>
         <el-button
+          class="submit-button"
           type="primary"
-          @click="submitForm(ruleFormRef)"
+          :loading="loading"
+          native-type="submit"
         >
-          Create
+          登录
         </el-button>
       </el-form-item>
     </el-form>
@@ -51,80 +56,30 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import type { FormInstance, FormRules } from 'element-plus'
+import { User, Key, Lock } from '@element-plus/icons-vue'
 
-const ruleFormRef = ref<FormInstance>()
-const ruleForm = reactive({
+const user = reactive({
   account: 'admin',
-  pwd: '',
+  pwd: '123456',
   imgcode: ''
 })
-
-const rules = reactive<FormRules>({
-  name: [
-    { required: true, message: 'Please input Activity name', trigger: 'blur' },
-    { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+const loading = ref(false)
+const rules = ref({
+  account: [
+    { required: true, message: '请输入账号', trigger: 'change' }
   ],
-  region: [
-    {
-      required: true,
-      message: 'Please select Activity zone',
-      trigger: 'change'
-    }
+  pwd: [
+    { required: true, message: '请输入密码', trigger: 'change' }
   ],
-  count: [
-    {
-      required: true,
-      message: 'Please select Activity count',
-      trigger: 'change'
-    }
-  ],
-  date1: [
-    {
-      type: 'date',
-      required: true,
-      message: 'Please pick a date',
-      trigger: 'change'
-    }
-  ],
-  date2: [
-    {
-      type: 'date',
-      required: true,
-      message: 'Please pick a time',
-      trigger: 'change'
-    }
-  ],
-  type: [
-    {
-      type: 'array',
-      required: true,
-      message: 'Please select at least one activity type',
-      trigger: 'change'
-    }
-  ],
-  resource: [
-    {
-      required: true,
-      message: 'Please select activity resource',
-      trigger: 'change'
-    }
-  ],
-  desc: [
-    { required: true, message: 'Please input activity form', trigger: 'blur' }
+  imgcode: [
+    { required: true, message: '请输入验证码', trigger: 'change' }
   ]
 })
 
-const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  await formEl.validate((valid, fields) => {
-    if (valid) {
-      console.log('submit!')
-    } else {
-      console.log('error submit!', fields)
-    }
-  })
+const handleSubmit = async () => {
+  console.log('handleSubmit')
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -135,5 +90,44 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   justify-content: center;
   align-items: center;
   background-color: #2d3a4b;
+}
+
+.login-form {
+  padding: 30px;
+  border-radius: 6px;
+  background: #fff;
+  min-width: 350px;
+  .login-form__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+
+  .el-form-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .login__form-title {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+
+  .login-logo {
+    width: 271px;
+    height: 74px;
+  }
+  .imgcode-wrap {
+    display: flex;
+    align-items: center;
+    .imgcode {
+      height: 37px;
+    }
+  }
 }
 </style>
