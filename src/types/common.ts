@@ -17,14 +17,31 @@ export type ILogin = {
   imgcode: string
 }
 
-// 登录接口返回类型
-export type ILoginResponse = ICommom<{
-  token: string;
-  expires_time: number;
+// 菜单类型
+export type IMenu={
+  header: string;
+  icon: string;
+  is_header: number;
   path: string;
   title: string;
-  icon: string;
-  header: string;
-  is_header: number;
-  children: never[];
+}
+
+// 用户信息类型
+export type IUserInfo={
+  account: string;
+  head_pic: string;
+  id: number;
+}
+
+// 登录接口返回类型
+export type ILoginResponse = ICommom<{
+  expires_time: number;
+  logo: string;
+  logo_square: string;
+  menus: IMenu[];
+  newOrderAudioLink: string;
+  token: string;
+  unique_auth:Array<string>;
+  user_info:IUserInfo;
+  version: string;
 }>

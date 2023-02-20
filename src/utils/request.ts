@@ -3,6 +3,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig
 } from 'axios'
+import { ElMessage } from 'element-plus'
 
 const request: AxiosInstance = axios.create({
   baseURL: '/api',
@@ -25,6 +26,9 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response: AxiosResponse) => {
+    if (response.data && response.data.status !== 200) {
+      ElMessage.error(response.data.msg)
+    }
     return response.data
   },
   (error: any) => {

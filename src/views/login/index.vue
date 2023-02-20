@@ -57,12 +57,17 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { User, Key, Lock } from '@element-plus/icons-vue'
+import { login } from '@/api/common'
+import { useRouter } from 'vue-router'
+import { useGlobalStore } from '@/store/global'
 
+const { updateUseInfo } = useGlobalStore()
 const user = reactive({
   account: 'admin',
   pwd: '123456',
   imgcode: ''
 })
+const router = useRouter()
 const loading = ref(false)
 const rules = ref({
   account: [
@@ -77,7 +82,11 @@ const rules = ref({
 })
 
 const handleSubmit = async () => {
-  console.log('handleSubmit')
+  const res = await login(user)
+  if (res.status === 200) {
+    updateUseInfo(res.data)
+    router.replace('/')
+  }
 }
 
 </script>
