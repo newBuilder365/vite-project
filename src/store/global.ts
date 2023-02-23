@@ -12,8 +12,8 @@ export const useGlobalStore = defineStore('global', {
     updateCollapse () {
       this.collapse = !this.collapse
     },
-    updateUseInfo (user:ILoginResponse) {
-      window.localStorage.setItem('user', JSON.stringify(user))
+    updateUseInfo (user:ILoginResponse|null) {
+      user ? window.localStorage.setItem('user', JSON.stringify(user)) : window.localStorage.removeItem('user')
       this.user = user
     }
   }

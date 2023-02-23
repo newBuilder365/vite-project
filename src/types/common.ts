@@ -24,6 +24,7 @@ export type IMenu={
   is_header: number;
   path: string;
   title: string;
+  children?: IMenu[]
 }
 
 // 用户信息类型
@@ -34,7 +35,7 @@ export type IUserInfo={
 }
 
 // 登录接口返回类型
-export type ILoginResponse = ICommom<{
+export type ILoginResponse = {
   expires_time: number;
   logo: string;
   logo_square: string;
@@ -44,4 +45,4 @@ export type ILoginResponse = ICommom<{
   unique_auth:Array<string>;
   user_info:IUserInfo;
   version: string;
-}>
+}

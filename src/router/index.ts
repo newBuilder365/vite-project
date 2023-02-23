@@ -10,6 +10,7 @@ import 'nprogress/nprogress.css'
 const routes: RouteRecordRaw[] = [
   {
     path: '/login',
+    name: 'login',
     component: () => import('@/views/login/index.vue')
   },
   {
@@ -36,9 +37,13 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from) => {
+router.beforeEach((to, from, next) => {
+  const user = window.localStorage.getItem('user')
   nprogress.start()
-  // document.title = to.meta.title
+  if (!user && to.name !== 'login') {
+    return next({ path: '/login' })
+  }
+  next()
 })
 
 router.afterEach(() => {
