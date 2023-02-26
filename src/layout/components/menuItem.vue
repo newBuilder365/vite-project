@@ -1,8 +1,12 @@
 <template>
   <el-sub-menu
-    :v-if="menu.children&&menu.children.length"
-    index="product"
+    v-if="menu.children&&menu.children.length"
+    :index="menu.path"
   >
+    <template #title>
+      <el-icon><Document /></el-icon>
+      <span>{{ menu.title }}</span>
+    </template>
     <MenuItem
       :key="subMenu.path"
       v-for="subMenu in menu.children"
@@ -10,10 +14,12 @@
     />
   </el-sub-menu>
   <el-menu-item
+    v-else
     :index="menu.path"
     :key="menu.path"
   >
-    商品列表
+    <el-icon><HomeFilled /></el-icon>
+    {{ menu.title }}
   </el-menu-item>
 </template>
 

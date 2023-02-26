@@ -14,14 +14,14 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/login/index.vue')
   },
   {
-    path: '/',
+    path: '/admin',
     component: AppLayout,
     meta: {
       title: '首页'
     },
     children: [
       {
-        path: '',
+        path: 'home',
         component: () => import('@/views/home/index.vue')
       },
       ProductRoute,

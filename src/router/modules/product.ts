@@ -1,12 +1,12 @@
 import { RouterView, RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw = {
-  path: '/product',
+  path: 'product',
   name: 'product',
   component: RouterView,
   children: [
     {
-      path: 'list',
+      path: 'product_list',
       name: 'product_list',
       meta: {
         title: '产品列表'
@@ -14,7 +14,7 @@ const routes: RouteRecordRaw = {
       component: import('@/views/product/list/index.vue')
     },
     {
-      path: 'classify',
+      path: 'product_classify',
       name: 'product_classify',
       meta: {
         title: '产品分类'
@@ -22,7 +22,7 @@ const routes: RouteRecordRaw = {
       component: import('@/views/product/classify/index.vue')
     },
     {
-      path: 'attr',
+      path: 'product_attr',
       name: 'product_attr',
       meta: {
         title: '商品规格'
@@ -30,7 +30,7 @@ const routes: RouteRecordRaw = {
       component: import('@/views/product/attr/index.vue')
     },
     {
-      path: 'reply',
+      path: 'product_reply',
       name: 'product_reply',
       meta: {
         title: '商品评论'

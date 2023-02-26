@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 export const useGlobalStore = defineStore('global', {
   state () {
     return {
-      collapse: true,
+      collapse: false,
       user: (window.localStorage.user ? JSON.parse(window.localStorage.user) : null) as ILoginResponse|null
     }
   },

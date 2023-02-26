@@ -1,29 +1,29 @@
 import { RouterView, RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw = {
-  path: '/permission',
-  name: 'permission',
+  path: 'setting',
+  name: 'setting',
   component: RouterView,
   children: [
     {
-      path: 'role',
-      name: 'permission_role',
+      path: 'system_role/index',
+      name: 'system_role',
       meta: {
         title: '角色'
       },
       component: import('@/views/permission/role/index.vue')
     },
     {
-      path: 'admin',
-      name: 'permission_admin',
+      path: 'system_admin/index',
+      name: 'system_admin',
       meta: {
         title: '管理员'
       },
       component: () => import('@/views/permission/admin/index.vue')
     },
     {
-      path: 'rule',
-      name: 'permission_rule',
+      path: 'system_menus/index',
+      name: 'system_menus',
       meta: {
         title: '权限'
       },

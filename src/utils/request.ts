@@ -15,7 +15,12 @@ const request: AxiosInstance = axios.create({
 request.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     // 在这里可以对请求参数进行处理，例如加入 token
-    // config.headers["Authorization"] = "Bearer " + window.localStorage.getItem("token");
+    const user = window.localStorage.getItem('user')
+    let token = ''
+    if (user) {
+      token = JSON.parse(user).token
+    }
+    config.headers.Authorization = 'Bearer ' + token
     return config
   },
   (error: any) => {

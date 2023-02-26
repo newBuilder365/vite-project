@@ -10,13 +10,16 @@
     Primary
   </el-button>
   <Foo />
+  <AppIcon
+    name="edit"
+  />
 </template>
 
 <script lang="ts" setup>
 import { getLoginInfo } from '@/api/common'
 import { useUserStore } from '@/store/user'
-import { onMounted } from 'vue'
 import { Edit } from '@element-plus/icons-vue'
+import { onMounted } from 'vue'
 const { name } = useUserStore()
 onMounted(() => {
   getLoginInfo().then((res) => {
