@@ -7,7 +7,7 @@
       <el-header>
         <AppHeader />
       </el-header>
-      <el-main>
+      <el-main id="teleport-main">
         <router-view />
       </el-main>
     </el-container>

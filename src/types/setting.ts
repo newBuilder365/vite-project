@@ -3,7 +3,7 @@ export type IAdminQuery= {
   limit:number;
   name?:string;
   roles?:string;
-  status?:number
+  status?:number|''
 }
 
 export type IAdminRes = {

@@ -1,5 +1,8 @@
 import { AxiosResponse } from 'axios'
 
+// 新增编辑类型
+export type IOperateType = 'add'|'edit'|''
+
 // 接口返回后最终想要类型
 export type ICommom<T>= {
   status: number;

@@ -85,7 +85,7 @@ const handleSubmit = async () => {
   const res = await login(user)
   if (res.status === 200) {
     updateUseInfo(res.data)
-    router.replace('/')
+    router.replace('/admin/home')
   }
 }
 
