@@ -1,6 +1,8 @@
 <template>
   <DialogForm
     :title="`${props.adminId?'编辑':'添加'}管理员`"
+    @confirm="handleConfirm "
+    @open="handleOpend"
   >
     <el-form
       ref="form"
@@ -55,9 +57,10 @@
           placeholder="请选择管理员身份"
         >
           <el-option
-            key="aa"
-            label="aa"
-            value="aa"
+            v-for="item in roles"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
           />
         </el-select>
       </el-form-item>
@@ -84,12 +87,20 @@ import { ref } from 'vue'
 import type { PropType } from 'vue'
 import DialogForm from '@/components/DialogForm/index.vue'
 import { IElForm, IFormRule } from '@/types/element'
+import { getRoles } from '@/api/setting'
+import { ISelectOptions } from '@/types/setting'
 const props = defineProps({
   adminId: {
     type: Number as PropType<number|null>,
     default: null
   }
 })
+
+interface EmitsType {
+  (e:'handleSuccess'):void
+}
+
+const emits = defineEmits<EmitsType>()
 
 const form = ref<IElForm>(null)
 
@@ -121,6 +132,21 @@ const formRules: IFormRule = {
 }
 
 const formLoading = ref(false)
+
+const roles = ref<ISelectOptions[]>([])
+
+const handleConfirm = () => {
+  emits('handleSuccess')
+}
+
+const getCurrentRoles = async () => {
+  const data = await getRoles()
+  roles.value = data
+}
+
+const handleOpend = () => {
+  getCurrentRoles()
+}
 </script>
 
 <style lang="scss"></style>

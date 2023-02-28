@@ -129,6 +129,7 @@
     <AdminForm
       v-model="dialogVisible"
       :admin-id="adminId"
+      @handle-success="handleSuccess"
     />
   </div>
 </template>
@@ -187,6 +188,10 @@ onMounted(() => {
 const handleOperate = (id:null|number) => {
   dialogVisible.value = true
   adminId.value = id
+}
+
+const handleSuccess = () => {
+  dialogVisible.value = false
 }
 
 </script>
