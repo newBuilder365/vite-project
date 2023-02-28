@@ -42,7 +42,7 @@
         <div class="card-header">
           <el-button
             type="primary"
-            @click="handleOperate('add')"
+            @click="handleOperate(null)"
           >
             添加管理员
           </el-button>
@@ -97,21 +97,23 @@
             label="操作"
             align="center"
           >
-            <el-button
-              size="small"
-              type="primary"
-              @click="handleOperate('edit')"
-              text
-            >
-              编辑
-            </el-button>
-            <el-button
-              size="small"
-              type="danger"
-              text
-            >
-              删除
-            </el-button>
+            <template #default="scope">
+              <el-button
+                size="small"
+                type="primary"
+                @click="handleOperate(scope.row.id)"
+                text
+              >
+                编辑
+              </el-button>
+              <el-button
+                size="small"
+                type="danger"
+                text
+              >
+                删除
+              </el-button>
+            </template>
           </el-table-column>
         </el-table>
         <div class="pagination">
@@ -124,25 +126,10 @@
         </div>
       </div>
     </el-card>
-    <el-dialog
+    <AdminForm
       v-model="dialogVisible"
-      :title="`${type==='add'?'新增':'编辑'}管理员`"
-      width="30%"
-      :before-close="handleClose"
-    >
-      <AdminForm />
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">Cancel</el-button>
-          <el-button
-            type="primary"
-            @click="dialogVisible = false"
-          >
-            Confirm
-          </el-button>
-        </span>
-      </template>
-    </el-dialog>
+      :admin-id="adminId"
+    />
   </div>
 </template>
 
@@ -151,8 +138,7 @@ import { ref, reactive, onMounted } from 'vue'
 import { getAdmin } from '@/api/setting'
 import { IAdminRes, IAdminQuery } from '@/types/setting'
 import { Search } from '@element-plus/icons-vue'
-import { IOperateType } from '@/types/common'
-import AdminForm from './form.vue'
+import AdminForm from './AdminForm.vue'
 
 const loading = ref(false)
 
@@ -165,8 +151,7 @@ const params = reactive({
 const total = ref(0)
 
 const dialogVisible = ref(false)
-// 弹窗操作类型 add-新增  edit-编辑
-const type = ref<IOperateType>('')
+const adminId = ref<number|null>(null)
 
 const tableData = ref<IAdminRes[]>([])
 const options = [
@@ -199,13 +184,9 @@ onMounted(() => {
   loadData()
 })
 
-const handleOperate = (operateType: IOperateType) => {
+const handleOperate = (id:null|number) => {
   dialogVisible.value = true
-  type.value = operateType
-}
-
-const handleClose = () => {
-  dialogVisible.value = false
+  adminId.value = id
 }
 
 </script>
